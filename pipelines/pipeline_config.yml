@@ -1,0 +1,29 @@
+pipeline_name: LLM_Validation_Workflow
+description: A configurable pipeline for validating LLM outputs.
+
+steps:
+  - name: SearchAndExtract
+    description: Discover and extract information about the AI tool.
+    agent: SearchAgent
+    parameters:
+      query: "API documentation for LLM tool X"
+
+  - name: BuildValidationPipeline
+    description: Dynamically construct the testing pipeline.
+    agent: PipelineBuilderAgent
+
+  - name: ValidateLLMOutput
+    description: Perform detailed checks on LLM outputs (hallucination, correctness, bias).
+    agent: ValidationAgent
+    parameters:
+      model_id: "HuggingFaceH4/zephyr-7b-beta"
+
+  - name: MeasureAndMonitor
+    description: Implement real-time monitoring and metrics collection.
+    agent: MeasureMonitorAgent
+
+  - name: ExecuteWorkflow
+    description: Orchestrate and execute the entire validation workflow.
+    agent: ExecutionAgent
+
+
